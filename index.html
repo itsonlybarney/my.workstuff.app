@@ -1,0 +1,677 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Links</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500&display=swap" rel="stylesheet" />
+  <link href="https://cdn.jsdelivr.net/npm/@tabler/icons-webfont@3.19.0/tabler-icons.min.css" rel="stylesheet" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --bg: #F5F4F2;
+      --surface: #FFFFFF;
+      --border: #E3E1DC;
+      --border-hover: #C8C5BE;
+      --text: #1C1B18;
+      --muted: #807D75;
+      --faint: #C4C1B8;
+      --accent: #2C5FE4;
+      --accent-soft: #EEF2FF;
+      --sidebar-w: 210px;
+      --radius: 8px;
+    }
+
+    @media (prefers-color-scheme: dark) {
+      :root {
+        --bg: #141312;
+        --surface: #1D1C1A;
+        --border: #2A2926;
+        --border-hover: #3C3A36;
+        --text: #E6E3DC;
+        --muted: #78756C;
+        --faint: #3A3835;
+        --accent: #6080FF;
+        --accent-soft: #1A2040;
+      }
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      font-family: 'Inter', system-ui, -apple-system, sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      font-size: 14px;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    /* ── Header ─────────────────────────────────── */
+
+    header {
+      position: sticky;
+      top: 0;
+      z-index: 20;
+      background: var(--bg);
+      border-bottom: 1px solid var(--border);
+      padding: 0 20px;
+      height: 52px;
+      display: flex;
+      align-items: center;
+      gap: 14px;
+    }
+
+    .logo {
+      font-size: 15px;
+      font-weight: 500;
+      letter-spacing: -0.03em;
+      color: var(--text);
+      white-space: nowrap;
+      flex-shrink: 0;
+    }
+
+    .logo span {
+      color: var(--faint);
+      font-weight: 400;
+    }
+
+    .search-wrap {
+      flex: 1;
+      max-width: 440px;
+      position: relative;
+    }
+
+    .search-wrap > i {
+      position: absolute;
+      left: 9px;
+      top: 50%;
+      transform: translateY(-50%);
+      font-size: 15px;
+      color: var(--faint);
+      pointer-events: none;
+    }
+
+    #search {
+      width: 100%;
+      height: 34px;
+      padding: 0 72px 0 30px;
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      background: var(--surface);
+      color: var(--text);
+      font-family: inherit;
+      font-size: 13.5px;
+      outline: none;
+      transition: border-color 0.12s;
+    }
+
+    #search::placeholder { color: var(--faint); }
+
+    #search:focus { border-color: var(--accent); }
+
+    .kbd {
+      position: absolute;
+      right: 8px;
+      top: 50%;
+      transform: translateY(-50%);
+      font-size: 10.5px;
+      color: var(--faint);
+      background: var(--bg);
+      border: 1px solid var(--border);
+      border-radius: 4px;
+      padding: 1px 5px;
+      pointer-events: none;
+      letter-spacing: 0.02em;
+    }
+
+    /* ── Layout ─────────────────────────────────── */
+
+    .layout {
+      display: flex;
+      flex: 1;
+      min-height: 0;
+    }
+
+    /* ── Sidebar ─────────────────────────────────── */
+
+    aside {
+      width: var(--sidebar-w);
+      flex-shrink: 0;
+      border-right: 1px solid var(--border);
+      padding: 16px 10px 32px;
+      position: sticky;
+      top: 52px;
+      height: calc(100vh - 52px);
+      overflow-y: auto;
+    }
+
+    .sidebar-label {
+      font-size: 10px;
+      font-weight: 500;
+      text-transform: uppercase;
+      letter-spacing: 0.09em;
+      color: var(--faint);
+      padding: 0 8px;
+      margin: 12px 0 5px;
+    }
+
+    .sidebar-label:first-child { margin-top: 0; }
+
+    .nav-btn {
+      display: flex;
+      align-items: center;
+      gap: 7px;
+      width: 100%;
+      padding: 6px 8px;
+      border-radius: 6px;
+      border: none;
+      background: none;
+      color: var(--muted);
+      font-family: inherit;
+      font-size: 13px;
+      text-align: left;
+      cursor: pointer;
+      transition: background 0.1s, color 0.1s;
+      margin-bottom: 1px;
+    }
+
+    .nav-btn i { font-size: 15px; flex-shrink: 0; }
+
+    .nav-btn:hover { background: var(--faint); color: var(--text); }
+
+    .nav-btn.active { background: var(--accent-soft); color: var(--accent); }
+
+    .nav-count {
+      margin-left: auto;
+      font-size: 11px;
+      color: var(--faint);
+      font-variant-numeric: tabular-nums;
+    }
+
+    .nav-btn.active .nav-count { color: var(--accent); opacity: 0.65; }
+
+    /* ── Main ─────────────────────────────────────── */
+
+    main {
+      flex: 1;
+      padding: 28px 28px 60px;
+      min-width: 0;
+    }
+
+    .category-section {
+      margin-bottom: 36px;
+      scroll-margin-top: 72px;
+    }
+
+    .category-header {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      margin-bottom: 12px;
+    }
+
+    .category-title {
+      font-size: 11px;
+      font-weight: 500;
+      letter-spacing: 0.07em;
+      text-transform: uppercase;
+      color: var(--muted);
+      white-space: nowrap;
+    }
+
+    .category-rule {
+      flex: 1;
+      height: 1px;
+      background: var(--border);
+    }
+
+    .links-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(210px, 1fr));
+      gap: 8px;
+    }
+
+    /* ── Link card ─────────────────────────────────── */
+
+    .link-card {
+      display: flex;
+      align-items: flex-start;
+      gap: 10px;
+      padding: 12px 13px;
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      background: var(--surface);
+      text-decoration: none;
+      color: inherit;
+      cursor: pointer;
+      transition: border-color 0.12s, box-shadow 0.12s;
+    }
+
+    .link-card:hover {
+      border-color: var(--accent);
+      box-shadow: 0 0 0 3px var(--accent-soft);
+    }
+
+    .favicon-wrap {
+      width: 20px;
+      height: 20px;
+      border-radius: 4px;
+      overflow: hidden;
+      flex-shrink: 0;
+      margin-top: 1px;
+      background: var(--bg);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .favicon-wrap img {
+      width: 16px;
+      height: 16px;
+      display: block;
+    }
+
+    .favicon-wrap i {
+      font-size: 13px;
+      color: var(--faint);
+    }
+
+    .link-info { min-width: 0; }
+
+    .link-title {
+      font-size: 13.5px;
+      font-weight: 500;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      line-height: 1.3;
+    }
+
+    .link-desc {
+      font-size: 11.5px;
+      color: var(--muted);
+      margin-top: 2px;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      line-height: 1.4;
+    }
+
+    /* ── Search highlight ──────────────────────────── */
+
+    mark {
+      background: #FEDD6A;
+      color: #1C1B18;
+      border-radius: 2px;
+      padding: 0 1px;
+    }
+
+    @media (prefers-color-scheme: dark) {
+      mark { background: #4C3F00; color: #F5E8A0; }
+    }
+
+    /* ── Empty state ────────────────────────────────── */
+
+    .empty-state {
+      display: none;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      padding: 80px 40px;
+      color: var(--faint);
+      text-align: center;
+    }
+
+    .empty-state.visible { display: flex; }
+
+    .empty-state i { font-size: 28px; margin-bottom: 12px; }
+
+    .empty-state p { font-size: 13.5px; color: var(--muted); }
+
+    .empty-state p strong { color: var(--text); font-weight: 500; }
+
+    /* ── Hidden ─────────────────────────────────────── */
+
+    .hidden { display: none !important; }
+
+    /* ── Responsive ─────────────────────────────────── */
+
+    @media (max-width: 720px) {
+      aside { display: none; }
+      main { padding: 20px 16px 48px; }
+      header { padding: 0 16px; }
+    }
+
+    @media (max-width: 480px) {
+      .links-grid { grid-template-columns: 1fr; }
+      .kbd { display: none; }
+    }
+  </style>
+</head>
+<body>
+
+<header>
+  <span class="logo">Links <span>/ Home</span></span>
+  <div class="search-wrap">
+    <i class="ti ti-search" aria-hidden="true"></i>
+    <input
+      type="search"
+      id="search"
+      placeholder="Search all links…"
+      autocomplete="off"
+      spellcheck="false"
+    />
+    <span class="kbd">⌘K</span>
+  </div>
+</header>
+
+<div class="layout">
+  <aside id="sidebar" aria-label="Categories"></aside>
+  <main id="main" aria-label="Links"></main>
+</div>
+
+<script>
+  /* ================================================================
+     LINK DATA
+     ── How to edit ─────────────────────────────────────────────────
+     Add, remove, or update entries below. Each category has:
+       id       – unique slug (used for sidebar navigation)
+       name     – displayed as the section heading
+       icon     – Tabler icon name  →  tabler.io/icons
+       links    – array of { title, url, description }
+
+     To add a new category: copy an existing block and change the values.
+     To add a new link: add a new object to the links array.
+     ================================================================ */
+
+  const CATEGORIES = [
+    {
+      id: 'work',
+      name: 'Work',
+      icon: 'ti-briefcase',
+      links: [
+        { title: 'GitHub',         url: 'https://github.com',               description: 'Code & repositories'       },
+        { title: 'Jira',           url: 'https://atlassian.net',            description: 'Project tracking'           },
+        { title: 'Confluence',     url: 'https://atlassian.net',            description: 'Team docs & wiki'           },
+        { title: 'Notion',         url: 'https://notion.so',               description: 'Notes & planning'           },
+        { title: 'Slack',          url: 'https://slack.com',               description: 'Team messaging'             },
+        { title: 'Google Meet',    url: 'https://meet.google.com',         description: 'Video calls'                },
+        { title: 'Google Drive',   url: 'https://drive.google.com',        description: 'Shared files'               },
+        { title: 'Gmail — Work',   url: 'https://mail.google.com',         description: 'Work inbox'                 },
+        { title: 'Google Cal',     url: 'https://calendar.google.com',     description: 'Schedule & meetings'        },
+        { title: 'Linear',         url: 'https://linear.app',              description: 'Sprint planning'            },
+      ]
+    },
+    {
+      id: 'internal',
+      name: 'Internal',
+      icon: 'ti-building-office',
+      links: [
+        { title: 'Intranet',       url: 'https://intranet.company.com',    description: 'Company home'               },
+        { title: 'IT Helpdesk',    url: 'https://helpdesk.company.com',    description: 'Submit support tickets'     },
+        { title: 'HR Portal',      url: 'https://hr.company.com',          description: 'Leave, payroll & benefits'  },
+        { title: 'Expense Claims', url: 'https://expenses.company.com',    description: 'Submit & track expenses'    },
+        { title: 'Company Wiki',   url: 'https://wiki.company.com',        description: 'Internal knowledge base'    },
+        { title: 'Org Chart',      url: 'https://org.company.com',         description: 'People & teams'             },
+      ]
+    },
+    {
+      id: 'dev',
+      name: 'Dev & Ops',
+      icon: 'ti-terminal-2',
+      links: [
+        { title: 'AWS Console',    url: 'https://console.aws.amazon.com',  description: 'Cloud infrastructure'       },
+        { title: 'Vercel',         url: 'https://vercel.com',              description: 'Deployments & previews'     },
+        { title: 'Datadog',        url: 'https://app.datadoghq.com',       description: 'Monitoring & logs'          },
+        { title: 'Sentry',         url: 'https://sentry.io',               description: 'Error tracking'             },
+        { title: 'PagerDuty',      url: 'https://pagerduty.com',           description: 'On-call & incidents'        },
+        { title: 'Local — :3000',  url: 'http://localhost:3000',           description: 'Local dev server'           },
+        { title: 'Staging',        url: 'https://staging.company.com',     description: 'Staging environment'        },
+        { title: 'Grafana',        url: 'https://grafana.company.com',     description: 'Dashboards & metrics'       },
+      ]
+    },
+    {
+      id: 'personal',
+      name: 'Personal',
+      icon: 'ti-user',
+      links: [
+        { title: 'Gmail',          url: 'https://mail.google.com',         description: 'Personal email'             },
+        { title: 'Google Cal',     url: 'https://calendar.google.com',     description: 'Personal schedule'          },
+        { title: 'Online Banking', url: 'https://yourbank.com',            description: 'Accounts & transfers'       },
+        { title: 'Netflix',        url: 'https://netflix.com',             description: 'Shows & movies'             },
+        { title: 'Spotify',        url: 'https://open.spotify.com',        description: 'Music & podcasts'           },
+        { title: 'Reddit',         url: 'https://reddit.com',              description: 'News & communities'         },
+      ]
+    },
+    {
+      id: 'references',
+      name: 'References',
+      icon: 'ti-book',
+      links: [
+        { title: 'MDN Web Docs',   url: 'https://developer.mozilla.org',   description: 'Web API reference'          },
+        { title: 'Can I Use',      url: 'https://caniuse.com',             description: 'Browser compatibility'      },
+        { title: 'DevDocs',        url: 'https://devdocs.io',              description: 'Unified API docs'           },
+        { title: 'Regex101',       url: 'https://regex101.com',            description: 'Regex builder & tester'     },
+        { title: 'JSON Formatter', url: 'https://jsonformatter.org',       description: 'Format & validate JSON'     },
+        { title: 'Tabler Icons',   url: 'https://tabler.io/icons',         description: 'Open-source icon set'       },
+      ]
+    }
+  ];
+
+  /* ================================================================
+     APP — no need to edit below this line
+     ================================================================ */
+
+  const sidebar = document.getElementById('sidebar');
+  const main    = document.getElementById('main');
+  const search  = document.getElementById('search');
+
+  function getFaviconUrl(url) {
+    try {
+      const domain = new URL(url).hostname;
+      return `https://www.google.com/s2/favicons?domain=${domain}&sz=32`;
+    } catch { return null; }
+  }
+
+  function escapeHtml(str) {
+    return str
+      .replace(/&/g, '&amp;')
+      .replace(/</g, '&lt;')
+      .replace(/>/g, '&gt;')
+      .replace(/"/g, '&quot;');
+  }
+
+  function highlight(text, query) {
+    if (!query) return escapeHtml(text);
+    const safe  = escapeHtml(text);
+    const safeQ = escapeHtml(query).replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
+    return safe.replace(new RegExp(`(${safeQ})`, 'gi'), '<mark>$1</mark>');
+  }
+
+  function buildSidebar() {
+    const allBtn = document.createElement('button');
+    allBtn.className = 'nav-btn active';
+    allBtn.dataset.target = 'all';
+    const totalLinks = CATEGORIES.reduce((n, c) => n + c.links.length, 0);
+    allBtn.innerHTML = `<i class="ti ti-layout-grid" aria-hidden="true"></i> All links <span class="nav-count">${totalLinks}</span>`;
+    sidebar.appendChild(allBtn);
+
+    const sep = document.createElement('div');
+    sep.className = 'sidebar-label';
+    sep.textContent = 'Categories';
+    sidebar.appendChild(sep);
+
+    CATEGORIES.forEach(cat => {
+      const btn = document.createElement('button');
+      btn.className = 'nav-btn';
+      btn.dataset.target = cat.id;
+      btn.innerHTML = `<i class="ti ${escapeHtml(cat.icon)}" aria-hidden="true"></i> ${escapeHtml(cat.name)} <span class="nav-count">${cat.links.length}</span>`;
+      sidebar.appendChild(btn);
+    });
+  }
+
+  function buildMain() {
+    main.innerHTML = '';
+
+    CATEGORIES.forEach(cat => {
+      const section = document.createElement('section');
+      section.className = 'category-section';
+      section.id = `cat-${cat.id}`;
+
+      section.innerHTML = `
+        <div class="category-header">
+          <span class="category-title">${escapeHtml(cat.name)}</span>
+          <div class="category-rule" aria-hidden="true"></div>
+        </div>
+        <div class="links-grid" id="grid-${cat.id}"></div>
+      `;
+
+      main.appendChild(section);
+
+      const grid = section.querySelector('.links-grid');
+
+      cat.links.forEach((link, idx) => {
+        const a = document.createElement('a');
+        a.className = 'link-card';
+        a.href = link.url;
+        a.target = '_blank';
+        a.rel = 'noopener noreferrer';
+        a.dataset.title = link.title.toLowerCase();
+        a.dataset.desc  = (link.description || '').toLowerCase();
+        a.dataset.idx   = idx;
+
+        const faviconUrl = getFaviconUrl(link.url);
+
+        a.innerHTML = `
+          <div class="favicon-wrap">
+            ${faviconUrl
+              ? `<img src="${escapeHtml(faviconUrl)}" alt="" loading="lazy" onerror="this.style.display='none';this.nextElementSibling.style.display='block'" /><i class="ti ti-world" style="display:none" aria-hidden="true"></i>`
+              : `<i class="ti ti-world" aria-hidden="true"></i>`
+            }
+          </div>
+          <div class="link-info">
+            <div class="link-title" data-field="title">${escapeHtml(link.title)}</div>
+            ${link.description ? `<div class="link-desc" data-field="desc">${escapeHtml(link.description)}</div>` : ''}
+          </div>
+        `;
+
+        grid.appendChild(a);
+      });
+    });
+
+    const empty = document.createElement('div');
+    empty.className = 'empty-state';
+    empty.id = 'empty-state';
+    empty.innerHTML = `
+      <i class="ti ti-search-off" aria-hidden="true"></i>
+      <p>No links match <strong id="empty-query"></strong></p>
+    `;
+    main.appendChild(empty);
+  }
+
+  function filterLinks(query) {
+    const q = query.trim().toLowerCase();
+    let totalVisible = 0;
+
+    CATEGORIES.forEach(cat => {
+      const section = document.getElementById(`cat-${cat.id}`);
+      const cards   = section.querySelectorAll('.link-card');
+      let catVisible = 0;
+
+      cards.forEach(card => {
+        const titleEl = card.querySelector('[data-field="title"]');
+        const descEl  = card.querySelector('[data-field="desc"]');
+        const catIdx  = Array.from(CATEGORIES).findIndex(c => c.id === cat.id);
+        const link    = CATEGORIES[catIdx].links[+card.dataset.idx];
+
+        if (!q || card.dataset.title.includes(q) || card.dataset.desc.includes(q)) {
+          card.classList.remove('hidden');
+          catVisible++;
+          totalVisible++;
+          if (titleEl) titleEl.innerHTML = highlight(link.title,             query.trim());
+          if (descEl)  descEl.innerHTML  = highlight(link.description || '', query.trim());
+        } else {
+          card.classList.add('hidden');
+        }
+      });
+
+      section.classList.toggle('hidden', catVisible === 0);
+    });
+
+    const emptyState = document.getElementById('empty-state');
+    const emptyQuery = document.getElementById('empty-query');
+    if (totalVisible === 0 && q) {
+      emptyState.classList.add('visible');
+      emptyQuery.textContent = `"${query.trim()}"`;
+    } else {
+      emptyState.classList.remove('visible');
+    }
+  }
+
+  function updateActiveSidebarBtn(targetId) {
+    sidebar.querySelectorAll('.nav-btn').forEach(btn => {
+      btn.classList.toggle('active', btn.dataset.target === targetId);
+    });
+  }
+
+  function scrollToCategory(id) {
+    if (id === 'all') {
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    } else {
+      const el = document.getElementById(`cat-${id}`);
+      if (el) el.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    }
+    updateActiveSidebarBtn(id);
+  }
+
+  function init() {
+    buildSidebar();
+    buildMain();
+
+    sidebar.addEventListener('click', e => {
+      const btn = e.target.closest('.nav-btn');
+      if (!btn) return;
+      scrollToCategory(btn.dataset.target);
+    });
+
+    search.addEventListener('input', () => filterLinks(search.value));
+
+    document.addEventListener('keydown', e => {
+      if ((e.metaKey || e.ctrlKey) && e.key === 'k') {
+        e.preventDefault();
+        search.focus();
+        search.select();
+      }
+      if (e.key === 'Escape' && document.activeElement === search) {
+        search.blur();
+        search.value = '';
+        filterLinks('');
+      }
+    });
+
+    const observer = new IntersectionObserver(entries => {
+      if (search.value.trim()) return;
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          const id = entry.target.id.replace('cat-', '');
+          updateActiveSidebarBtn(id);
+        }
+      });
+    }, { rootMargin: '-52px 0px -60% 0px', threshold: 0 });
+
+    CATEGORIES.forEach(cat => {
+      const section = document.getElementById(`cat-${cat.id}`);
+      if (section) observer.observe(section);
+    });
+  }
+
+  init();
+</script>
+</body>
+</html>
